@@ -1,0 +1,112 @@
+﻿Metode Trapezoidal
+#include <iostream>
+#include <cmath>
+
+
+// Definisikan fungsi yang akan diintegrasikan
+double f(double x) {
+    return x * x - 4 * x + 3;  // Misalnya f(x) = x^2
+}
+
+
+// Metode trapezoidal untuk menghitung integral
+double trapezoidal(double a, double b, int n) {
+    double h = (b - a) / n;  // Panjang setiap subinterval
+    double sum = 0.5 * (f(a) + f(b));  // Hitung suku pertama dan terakhir
+    
+    // Tambahkan suku-suku dari subinterval pertama sampai subinterval kedua terakhir
+    for (int i = 1; i < n; ++i) {
+        double xi = a + i * h;
+        sum += f(xi);
+    }
+    
+    return sum * h;
+}
+
+
+int main() {
+    double a, b;
+    int n;
+    
+    // Meminta pengguna untuk memasukkan nilai a, b, dan n
+    std::cout << "Masukkan nilai batas bawah a: ";
+    std::cin >> a;
+    
+    std::cout << "Masukkan nilai batas atas b: ";
+    std::cin >> b;
+    
+    std::cout << "Masukkan jumlah subinterval n: ";
+    std::cin >> n;
+    
+    // Memastikan n > 0 agar valid
+    if (n <= 0) {
+        std::cerr << "Jumlah subinterval n harus lebih dari 0." << std::endl;
+        return 1;
+    }
+    
+    double integral = trapezoidal(a, b, n);
+    
+    std::cout << "Hasil integral menggunakan metode trapezoidal: " << integral << std::endl;
+    
+    return 0;
+}
+
+
+
+
+
+
+Metode Riemann
+
+
+#include <iostream>
+#include <cmath>
+
+
+// Definisikan fungsi yang akan diintegrasikan
+double f(double x) {
+    return x * x - 4 * x + 3;  // Misalnya f(x) = x^2-4x+3
+}
+
+
+// Metode Riemann untuk menghitung integral
+double riemann(double a, double b, int n) {
+    double h = (b - a) / n;  // Panjang setiap subinterval
+    double sum = 0.0;
+    
+    // Tambahkan suku-suku dari setiap subinterval
+    for (int i = 0; i < n; ++i) {
+        double xi = a + i * h;
+        sum += f(xi);
+    }
+    
+    return sum * h;
+}
+
+
+int main() {
+    double a, b;
+    int n;
+    
+    // Meminta pengguna untuk memasukkan nilai a, b, dan n
+    std::cout << "Masukkan nilai batas bawah a: ";
+    std::cin >> a;
+    
+    std::cout << "Masukkan nilai batas atas b: ";
+    std::cin >> b;
+    
+    std::cout << "Masukkan jumlah subinterval n: ";
+    std::cin >> n;
+    
+    // Memastikan n > 0 agar valid
+    if (n <= 0) {
+        std::cerr << "Jumlah subinterval n harus lebih dari 0." << std::endl;
+        return 1;
+    }
+    
+    double integral = riemann(a, b, n);
+    
+    std::cout << "Hasil integral menggunakan metode Riemann: " << integral << std::endl;
+    
+    return 0;
+}
